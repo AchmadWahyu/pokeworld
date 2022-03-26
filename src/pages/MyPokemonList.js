@@ -7,7 +7,11 @@ import { MdDelete } from "react-icons/md";
 import { MyPokemonContext } from "../contexts/MyPokemonContext";
 
 const MyPokemonList = () => {
-  const { pokemon } = useContext(MyPokemonContext);
+  const { pokemon, removePokemon } = useContext(MyPokemonContext);
+
+  const handleClickRemovePokemon = (id) => {
+    removePokemon(id);
+  };
 
   return (
     <div>
@@ -42,7 +46,14 @@ const MyPokemonList = () => {
               {pokemon.name}
             </h4>
             <h4>{pokemon.nickName}</h4>
-            <div>
+            <button
+              type="button"
+              onClick={() => handleClickRemovePokemon(pokemon.nanoId)}
+              css={css`
+                background-color: #ffff;
+                border: none;
+              `}
+            >
               <MdDelete
                 css={css`
                   padding-top: 1em;
@@ -50,7 +61,7 @@ const MyPokemonList = () => {
                   font-size: 1.2em;
                 `}
               />
-            </div>
+            </button>
           </div>
         ))}
       </div>
