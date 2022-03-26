@@ -12,14 +12,17 @@ import {
   Snackbar,
   TextField,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MdExplore } from "react-icons/md";
 import { SiPocket } from "react-icons/si";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { MyPokemonContext } from "./contexts/MyPokemonContext";
 import { ReactComponent as PokeBall } from "./icons/pokeball.svg";
 
 const Layout = ({ children }) => {
   let history = useHistory();
+  const { pokemon_name } = useParams();
+  const { pokemon: myPokemon, addPokemon } = useContext(MyPokemonContext);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [isCaught, setIsCaught] = useState(false);
   useEffect(() => {
@@ -46,12 +49,21 @@ const Layout = ({ children }) => {
     setNickName(e.target.value);
   };
 
+  const isAlreadyUsed = (name) => {
+    return myPokemon.includes((pokemon) => pokemon.name === name);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("berhasil!, nama: ", nickName);
+    if (isAlreadyUsed(nickName)) {
+      window.alert("nama sudah digunakan!");
+    } else {
+      addPokemon(pokemon_name, nickName);
+    }
+
     setIsCaught(false);
     setOpenAddNickName(false);
-  }
+  };
 
   return (
     <div
@@ -161,7 +173,11 @@ const Layout = ({ children }) => {
           {isCaught ? "Gotcha!" : "Miss!"}
         </Alert>
       </Snackbar>
-      <Dialog open={openAddNickName} onClose={() => setOpenAddNickName(false)}>
+      <Dialog
+        onBackdropClick="false"
+        open={openAddNickName}
+        onClose={() => setOpenAddNickName(false)}
+      >
         <form onSubmit={handleSubmit}>
           <DialogTitle>Caught Pokemon!</DialogTitle>
           <DialogContent>
