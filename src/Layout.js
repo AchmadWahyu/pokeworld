@@ -1,6 +1,8 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from "@emotion/react";
+import { Alert, Snackbar } from "@mui/material";
+import { useState } from "react";
 import { MdExplore } from "react-icons/md";
 import { SiPocket } from "react-icons/si";
 import { useHistory } from "react-router-dom";
@@ -8,8 +10,16 @@ import { ReactComponent as PokeBall } from "./icons/pokeball.svg";
 
 const Layout = ({ children }) => {
   let history = useHistory();
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [isCaught, setIsCaught] = useState(false);
 
-  const handleClickCatchPokemon = () => {};
+  const handleClickCatchPokemon = () => {
+    setTimeout(() => {
+      const isPokemonCaught = Math.floor(Math.random() * 2);
+      setIsCaught(isPokemonCaught);
+      setOpenSnackbar(true);
+    }, 1000);
+  };
 
   return (
     <div
@@ -100,6 +110,20 @@ const Layout = ({ children }) => {
           </span>
         </button>
       </div>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity={isCaught ? "success" : "warning"}
+          sx={{ width: "100%" }}
+        >
+          {isCaught ? "Gotcha!" : "Miss!"}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
