@@ -4,9 +4,12 @@ import { css, jsx } from "@emotion/react";
 import { MdExplore } from "react-icons/md";
 import { SiPocket } from "react-icons/si";
 import { useHistory } from "react-router-dom";
+import { ReactComponent as PokeBall } from "./icons/pokeball.svg";
 
 const Layout = ({ children }) => {
   let history = useHistory();
+
+  const handleClickCatchPokemon = () => {};
 
   return (
     <div
@@ -57,6 +60,21 @@ const Layout = ({ children }) => {
           >
             Pokemon List
           </span>
+        </button>
+        <button
+          type="button"
+          css={css`
+            flex-grow: 1;
+            background-color: #ffff;
+            border: none;
+          `}
+          onClick={handleClickCatchPokemon}
+        >
+          <PokeBall
+            css={css`
+              font-size: 40px;
+            `}
+          />
         </button>
         <button
           type="button"
