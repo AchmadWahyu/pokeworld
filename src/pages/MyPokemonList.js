@@ -1,7 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import { useContext } from "react";
 import { css, jsx } from "@emotion/react";
 import { MdDelete } from "react-icons/md";
 import { MyPokemonContext } from "../contexts/MyPokemonContext";
