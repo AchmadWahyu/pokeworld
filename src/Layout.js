@@ -175,11 +175,7 @@ const Layout = ({ children }) => {
           {isCaught ? "Gotcha!" : "Miss!"}
         </Alert>
       </Snackbar>
-      <Dialog
-        onBackdropClick="false"
-        open={openAddNickName}
-        onClose={() => setOpenAddNickName(false)}
-      >
+      <Dialog keepMounted open={openAddNickName}>
         <form onSubmit={handleSubmit}>
           <DialogTitle>Caught Pokemon!</DialogTitle>
           <DialogContent>
