@@ -24,8 +24,6 @@ const Layout = ({ children }) => {
     }, 1000);
   };
 
-  console.log("isThrowingPokeball: ", isThrowingPokeball);
-
   return (
     <div
       css={css`
