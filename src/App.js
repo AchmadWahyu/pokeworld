@@ -11,7 +11,7 @@ function App() {
     <Router>
       <Switch>
         <Layout>
-          <Route exact path="/pokemon/:pokemon_id">
+          <Route exact path="/pokemon/:pokemon_name">
             <PokemonDetail />
           </Route>
           <Route exact path="/my-pokemon">
