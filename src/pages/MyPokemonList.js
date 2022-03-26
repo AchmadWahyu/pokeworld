@@ -1,28 +1,13 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { css, jsx } from "@emotion/react";
 import { MdDelete } from "react-icons/md";
+import { MyPokemonContext } from "../contexts/MyPokemonContext";
 
 const MyPokemonList = () => {
-  const [pokemonList, setPokemonList] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("https://pokeapi.co/api/v2/pokemon/");
-        if (!response) {
-          window.alert("data kosong");
-        } else {
-          setPokemonList(response.data.results);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { pokemon } = useContext(MyPokemonContext);
 
   return (
     <div>
@@ -36,8 +21,9 @@ const MyPokemonList = () => {
           margin: 0 auto;
         `}
       >
-        {pokemonList.map((pokemon) => (
+        {pokemon.map((pokemon) => (
           <div
+            key={pokemon.nanoId}
             css={css`
               display: flex;
               flex-flow: row nowrap;
@@ -55,7 +41,7 @@ const MyPokemonList = () => {
             >
               {pokemon.name}
             </h4>
-            <h4>Boba</h4>
+            <h4>{pokemon.nickName}</h4>
             <div>
               <MdDelete
                 css={css`
