@@ -1,8 +1,18 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from "@emotion/react";
-import { Alert, Snackbar } from "@mui/material";
-import { useState } from "react";
+import {
+  Alert,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Snackbar,
+  TextField,
+} from "@mui/material";
+import { useEffect, useState } from "react";
 import { MdExplore } from "react-icons/md";
 import { SiPocket } from "react-icons/si";
 import { useHistory } from "react-router-dom";
@@ -12,17 +22,36 @@ const Layout = ({ children }) => {
   let history = useHistory();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [isCaught, setIsCaught] = useState(false);
+  useEffect(() => {
+    if (isCaught) {
+      setOpenAddNickName(true);
+    }
+  }, [isCaught]);
+
   const [isThrowingPokeball, setIsThrowingPokeball] = useState(false);
 
   const handleClickCatchPokemon = () => {
     setIsThrowingPokeball(true);
     setTimeout(() => {
       const isPokemonCaught = Math.floor(Math.random() * 2);
-      setIsCaught(isPokemonCaught);
+      setIsCaught(isPokemonCaught === 1);
       setOpenSnackbar(true);
       setIsThrowingPokeball(false);
     }, 1000);
   };
+
+  const [openAddNickName, setOpenAddNickName] = useState(false);
+  const [nickName, setNickName] = useState("");
+  const handleNicknameChange = (e) => {
+    setNickName(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("berhasil!, nama: ", nickName);
+    setIsCaught(false);
+    setOpenAddNickName(false);
+  }
 
   return (
     <div
@@ -132,6 +161,29 @@ const Layout = ({ children }) => {
           {isCaught ? "Gotcha!" : "Miss!"}
         </Alert>
       </Snackbar>
+      <Dialog open={openAddNickName} onClose={() => setOpenAddNickName(false)}>
+        <form onSubmit={handleSubmit}>
+          <DialogTitle>Caught Pokemon!</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Add nickname to your new Pokemon!
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Nickname"
+              type="text"
+              fullWidth
+              variant="standard"
+              onChange={handleNicknameChange}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button type="submit">Add Nickname</Button>
+          </DialogActions>
+        </form>
+      </Dialog>
     </div>
   );
 };
