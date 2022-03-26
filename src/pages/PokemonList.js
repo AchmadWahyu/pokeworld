@@ -43,8 +43,8 @@ const PokemonList = () => {
               justify-content: space-between;
               padding: 0 12px;
               border-radius: 6px;
-              box-shadow: 0px 11px 36px 8px rgba(214,214,214,1);
-              `}
+              box-shadow: 0px 11px 36px 8px rgba(214, 214, 214, 1);
+            `}
           >
             <h4>{pokemon.name}</h4>
             <h4>10</h4>

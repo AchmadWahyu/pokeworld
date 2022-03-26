@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { css, jsx } from "@emotion/react";
-import { MdDelete } from 'react-icons/md';
+import { MdDelete } from "react-icons/md";
 
 const MyPokemonList = () => {
   const [pokemonList, setPokemonList] = useState([]);
@@ -44,22 +44,26 @@ const MyPokemonList = () => {
               justify-content: space-between;
               padding: 0 12px;
               border-radius: 6px;
-              box-shadow: 0px 11px 36px 8px rgba(214,214,214,1);
+              box-shadow: 0px 11px 36px 8px rgba(214, 214, 214, 1);
               gap: 12px;
-              `}
+            `}
           >
-            <h4 
-                css={css`
-                    flex-grow:1
-                `}
-            >{pokemon.name}</h4>
+            <h4
+              css={css`
+                flex-grow: 1;
+              `}
+            >
+              {pokemon.name}
+            </h4>
             <h4>Boba</h4>
             <div>
-                <MdDelete css={css`
-                    padding-top: 1em;
-                    padding-bottom: 1em;
-                    font-size: 1.2em
-                `}/>
+              <MdDelete
+                css={css`
+                  padding-top: 1em;
+                  padding-bottom: 1em;
+                  font-size: 1.2em;
+                `}
+              />
             </div>
           </div>
         ))}
