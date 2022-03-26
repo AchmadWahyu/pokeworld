@@ -11,9 +11,24 @@ function App() {
     <Router>
       <Switch>
         <MyPokemonContextProvider>
-            <RouteWrapper exact path="/pokemon/:pokemon_name" component={PokemonDetail} layout={Layout}/>
-            <RouteWrapper exact path="/my-pokemon" component={MyPokemonList} layout={Layout}/>
-            <RouteWrapper exact path="/" component={PokemonList} layout={Layout}/>
+          <RouteWrapper
+            exact
+            path="/pokemon/:pokemon_name"
+            component={PokemonDetail}
+            layout={Layout}
+          />
+          <RouteWrapper
+            exact
+            path="/my-pokemon"
+            component={MyPokemonList}
+            layout={Layout}
+          />
+          <RouteWrapper
+            exact
+            path="/"
+            component={PokemonList}
+            layout={Layout}
+          />
         </MyPokemonContextProvider>
       </Switch>
     </Router>
