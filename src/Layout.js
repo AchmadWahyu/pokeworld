@@ -14,7 +14,13 @@ const Layout = ({ children }) => {
         position: relative;
       `}
     >
-      {children}
+      <div
+        css={css`
+          padding: 12px;
+        `}
+      >
+        {children}
+      </div>
       <div
         css={css`
           position: fixed;
