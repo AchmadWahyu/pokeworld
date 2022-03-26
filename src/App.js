@@ -4,22 +4,25 @@ import PokemonList from "./pages/PokemonList";
 import MyPokemonList from "./pages/MyPokemonList";
 import Layout from "./Layout";
 import PokemonDetail from "./pages/PokemonDetail";
+import MyPokemonContextProvider from "./contexts/MyPokemonContext";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Layout>
-          <Route exact path="/pokemon/:pokemon_name">
-            <PokemonDetail />
-          </Route>
-          <Route exact path="/my-pokemon">
-            <MyPokemonList />
-          </Route>
-          <Route exact path="/">
-            <PokemonList />
-          </Route>
-        </Layout>
+        <MyPokemonContextProvider>
+          <Layout>
+            <Route exact path="/pokemon/:pokemon_name">
+              <PokemonDetail />
+            </Route>
+            <Route exact path="/my-pokemon">
+              <MyPokemonList />
+            </Route>
+            <Route exact path="/">
+              <PokemonList />
+            </Route>
+          </Layout>
+        </MyPokemonContextProvider>
       </Switch>
     </Router>
   );
