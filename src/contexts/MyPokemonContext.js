@@ -6,8 +6,8 @@ export const MyPokemonContext = React.createContext();
 const MyPokemonContextProvider = ({ children }) => {
   const [pokemon, setPokemon] = useState([]);
 
-  const addPokemon = (name, nickname) => {
-    setPokemon([...pokemon, { name, nickname, nanoId: nanoid(5) }]);
+  const addPokemon = (name, nickName) => {
+    setPokemon([...pokemon, { name, nickName, nanoId: nanoid(5) }]);
   };
 
   const removePokemon = (id) => {
