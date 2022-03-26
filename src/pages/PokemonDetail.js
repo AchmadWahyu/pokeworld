@@ -6,13 +6,13 @@ import { css, jsx } from "@emotion/react";
 import { useParams } from "react-router-dom";
 
 const PokemonDetail = () => {
-  const { pokemon_id } = useParams();
+  const { pokemon_name } = useParams();
   const [pokemon, setPokemon] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon/${pokemon_id}`
+          `https://pokeapi.co/api/v2/pokemon/${pokemon_name}`
         );
         if (!response) {
           window.alert("data kosong");
@@ -25,7 +25,7 @@ const PokemonDetail = () => {
     };
 
     fetchData();
-  }, [pokemon_id]);
+  }, [pokemon_name]);
 
   return (
     <div>

@@ -3,8 +3,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { css, jsx } from "@emotion/react";
+import { useHistory } from "react-router-dom";
 
 const PokemonList = () => {
+  const history = useHistory();
+
   const [pokemonList, setPokemonList] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -23,6 +26,10 @@ const PokemonList = () => {
     fetchData();
   }, []);
 
+  const handlePokemonClick = (pokemonName) => {
+    history.push(`/pokemon/${pokemonName}`);
+  };
+
   return (
     <div>
       All Pokemon List
@@ -37,6 +44,7 @@ const PokemonList = () => {
       >
         {pokemonList.map((pokemon) => (
           <div
+            onClick={() => handlePokemonClick(pokemon.name)}
             css={css`
               display: flex;
               flex-flow: row nowrap;
