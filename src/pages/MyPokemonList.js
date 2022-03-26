@@ -10,8 +10,8 @@ const MyPokemonList = () => {
   const { pokemon, removePokemon } = useContext(MyPokemonContext);
 
   const handleClickRemovePokemon = (id) => {
-    removePokemon(id)
-  }
+    removePokemon(id);
+  };
 
   return (
     <div>
@@ -46,7 +46,14 @@ const MyPokemonList = () => {
               {pokemon.name}
             </h4>
             <h4>{pokemon.nickName}</h4>
-            <button type="button" onClick={() => handleClickRemovePokemon(pokemon.nanoId)}>
+            <button
+              type="button"
+              onClick={() => handleClickRemovePokemon(pokemon.nanoId)}
+              css={css`
+                background-color: #ffff;
+                border: none;
+              `}
+            >
               <MdDelete
                 css={css`
                   padding-top: 1em;
