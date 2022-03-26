@@ -11,7 +11,7 @@ const MyPokemonContextProvider = ({ children }) => {
   };
 
   const removePokemon = (id) => {
-    setPokemon(pokemon.filter(pokemon.nanoId !== id));
+    setPokemon(pokemon.filter(p => p.nanoId !== id));
   };
 
   return (
