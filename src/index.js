@@ -3,12 +3,9 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import Layout from "./Layout";
 
 ReactDOM.render(
-  <Layout>
-    <App />
-  </Layout>,
+    <App />,
   document.getElementById("root")
 );
 
