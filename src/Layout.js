@@ -12,14 +12,19 @@ const Layout = ({ children }) => {
   let history = useHistory();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [isCaught, setIsCaught] = useState(false);
+  const [isThrowingPokeball, setIsThrowingPokeball] = useState(false);
 
   const handleClickCatchPokemon = () => {
+    setIsThrowingPokeball(true);
     setTimeout(() => {
       const isPokemonCaught = Math.floor(Math.random() * 2);
       setIsCaught(isPokemonCaught);
       setOpenSnackbar(true);
+      setIsThrowingPokeball(false);
     }, 1000);
   };
+
+  console.log("isThrowingPokeball: ", isThrowingPokeball);
 
   return (
     <div
@@ -73,10 +78,15 @@ const Layout = ({ children }) => {
         </button>
         <button
           type="button"
+          disabled={isThrowingPokeball}
           css={css`
             flex-grow: 1;
             background-color: #ffff;
             border: none;
+
+            &:disabled {
+              opacity: 0.3;
+            }
           `}
           onClick={handleClickCatchPokemon}
         >
