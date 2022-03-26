@@ -44,6 +44,7 @@ const PokemonList = () => {
       >
         {pokemonList.map((pokemon) => (
           <div
+            key={pokemon.id}
             onClick={() => handlePokemonClick(pokemon.name)}
             css={css`
               display: flex;

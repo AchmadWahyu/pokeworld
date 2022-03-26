@@ -115,26 +115,28 @@ const Layout = ({ children }) => {
             Pokemon List
           </span>
         </button>
-        <button
-          type="button"
-          disabled={isThrowingPokeball}
-          css={css`
-            flex-grow: 1;
-            background-color: #ffff;
-            border: none;
-
-            &:disabled {
-              opacity: 0.3;
-            }
-          `}
-          onClick={handleClickCatchPokemon}
-        >
-          <PokeBall
+        {pokemon_name ? (
+          <button
+            type="button"
+            disabled={isThrowingPokeball}
             css={css`
-              font-size: 40px;
+              flex-grow: 1;
+              background-color: #ffff;
+              border: none;
+
+              &:disabled {
+                opacity: 0.3;
+              }
             `}
-          />
-        </button>
+            onClick={handleClickCatchPokemon}
+          >
+            <PokeBall
+              css={css`
+                font-size: 40px;
+              `}
+            />
+          </button>
+        ) : null}
         <button
           type="button"
           css={css`
