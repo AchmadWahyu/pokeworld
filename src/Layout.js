@@ -191,6 +191,7 @@ const Layout = ({ children }) => {
               fullWidth
               variant="standard"
               onChange={handleNicknameChange}
+              required
             />
           </DialogContent>
           <DialogActions>
