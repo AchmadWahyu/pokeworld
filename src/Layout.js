@@ -4,6 +4,7 @@ import { css, jsx } from "@emotion/react";
 import {
   Alert,
   Button,
+  Container,
   Dialog,
   DialogActions,
   DialogContent,
@@ -66,11 +67,7 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div
-      css={css`
-        position: relative;
-      `}
-    >
+    <Container maxWidth="sm">
       <div
         css={css`
           padding: 12px;
@@ -80,86 +77,94 @@ const Layout = ({ children }) => {
       </div>
       <div
         css={css`
-          position: fixed;
-          bottom: 0;
-          width: 100%;
-          padding: 12px;
           display: flex;
           flex-flow: row nowrap;
-          box-sizing: border-box;
-          background-color: #ffff;
-          box-shadow: 0px -8px 27px -11px rgba(133, 133, 133, 1);
-          text-align: center;
         `}
       >
-        <button
-          type="button"
+        <div
           css={css`
-            flex-grow: 1;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 552px;
+            padding: 12px 0;
+            display: flex;
+            flex-flow: row nowrap;
+            box-sizing: border-box;
             background-color: #ffff;
-            border: none;
+            box-shadow: 0px -8px 27px -11px rgba(133, 133, 133, 1);
+            text-align: center;
           `}
-          onClick={() => history.push("/")}
         >
-          <MdExplore
-            css={css`
-              font-size: 40px;
-            `}
-          />
-          <span
-            css={css`
-              font-weight: bold;
-              display: block;
-            `}
-          >
-            Pokemon List
-          </span>
-        </button>
-        {pokemon_name ? (
           <button
             type="button"
-            disabled={isThrowingPokeball}
             css={css`
               flex-grow: 1;
               background-color: #ffff;
               border: none;
-
-              &:disabled {
-                opacity: 0.3;
-              }
             `}
-            onClick={handleClickCatchPokemon}
+            onClick={() => history.push("/")}
           >
-            <PokeBall
+            <MdExplore
               css={css`
                 font-size: 40px;
               `}
             />
+            <span
+              css={css`
+                font-weight: bold;
+                display: block;
+              `}
+            >
+              Pokemon List
+            </span>
           </button>
-        ) : null}
-        <button
-          type="button"
-          css={css`
-            flex-grow: 1;
-            background-color: #ffff;
-            border: none;
-          `}
-          onClick={() => history.push("/my-pokemon")}
-        >
-          <SiPocket
+          {pokemon_name ? (
+            <button
+              type="button"
+              disabled={isThrowingPokeball}
+              css={css`
+                flex-grow: 1;
+                background-color: #ffff;
+                border: none;
+
+                &:disabled {
+                  opacity: 0.3;
+                }
+              `}
+              onClick={handleClickCatchPokemon}
+            >
+              <PokeBall
+                css={css`
+                  font-size: 40px;
+                `}
+              />
+            </button>
+          ) : null}
+          <button
+            type="button"
             css={css`
-              font-size: 40px;
+              flex-grow: 1;
+              background-color: #ffff;
+              border: none;
             `}
-          />
-          <span
-            css={css`
-              font-weight: bold;
-              display: block;
-            `}
+            onClick={() => history.push("/my-pokemon")}
           >
-            My Pokemon
-          </span>
-        </button>
+            <SiPocket
+              css={css`
+                font-size: 40px;
+              `}
+            />
+            <span
+              css={css`
+                font-weight: bold;
+                display: block;
+              `}
+            >
+              My Pokemon
+            </span>
+          </button>
+        </div>
       </div>
       <Snackbar
         open={openSnackbar}
@@ -199,7 +204,7 @@ const Layout = ({ children }) => {
           </DialogActions>
         </form>
       </Dialog>
-    </div>
+    </Container>
   );
 };
 
