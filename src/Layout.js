@@ -3,6 +3,8 @@
 import { css, jsx } from "@emotion/react";
 import {
   Alert,
+  BottomNavigation,
+  BottomNavigationAction,
   Button,
   Container,
   Dialog,
@@ -10,20 +12,21 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Paper,
   Snackbar,
   TextField,
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { MdExplore } from "react-icons/md";
 import { SiPocket } from "react-icons/si";
-import { useHistory, useParams } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import { MyPokemonContext } from "./contexts/MyPokemonContext";
 import { ReactComponent as PokeBall } from "./icons/pokeball.svg";
 
 const Layout = ({ children }) => {
-  let history = useHistory();
   const { pokemon_name } = useParams();
   const { pokemon: myPokemon, addPokemon } = useContext(MyPokemonContext);
+
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [isCaught, setIsCaught] = useState(false);
   useEffect(() => {
@@ -66,6 +69,9 @@ const Layout = ({ children }) => {
     setOpenAddNickName(false);
   };
 
+  const { pathname } = useLocation();
+  const [value, setValue] = useState(pathname);
+
   return (
     <Container maxWidth="sm">
       <div
@@ -75,97 +81,64 @@ const Layout = ({ children }) => {
       >
         {children}
       </div>
-      <div
-        css={css`
-          display: flex;
-          flex-flow: row nowrap;
-        `}
+      <Paper
+        sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+        elevation={3}
       >
-        <div
-          css={css`
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            max-width: 552px;
-            padding: 12px 0;
-            display: flex;
-            flex-flow: row nowrap;
-            box-sizing: border-box;
-            background-color: #ffff;
-            box-shadow: 0px -8px 27px -11px rgba(133, 133, 133, 1);
-            text-align: center;
-          `}
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
         >
-          <button
-            type="button"
-            css={css`
-              flex-grow: 1;
-              background-color: #ffff;
-              border: none;
-            `}
-            onClick={() => history.push("/")}
-          >
-            <MdExplore
-              css={css`
-                font-size: 40px;
-              `}
-            />
-            <span
-              css={css`
-                font-weight: bold;
-                display: block;
-              `}
-            >
-              Pokemon List
-            </span>
-          </button>
-          {pokemon_name ? (
-            <button
-              type="button"
-              disabled={isThrowingPokeball}
-              css={css`
-                flex-grow: 1;
-                background-color: #ffff;
-                border: none;
-
-                &:disabled {
-                  opacity: 0.3;
-                }
-              `}
-              onClick={handleClickCatchPokemon}
-            >
-              <PokeBall
+          <BottomNavigationAction
+            label="Explore Pokemon"
+            icon={
+              <MdExplore
                 css={css`
                   font-size: 40px;
                 `}
               />
-            </button>
-          ) : null}
-          <button
-            type="button"
-            css={css`
-              flex-grow: 1;
-              background-color: #ffff;
-              border: none;
-            `}
-            onClick={() => history.push("/my-pokemon")}
-          >
-            <SiPocket
+            }
+            value="/"
+            component={NavLink}
+            to="/"
+          />
+          {pokemon_name ? (
+            <BottomNavigationAction
+              label="Throw PokeBall"
               css={css`
-                font-size: 40px;
+                &:disabled {
+                  opacity: 0.3;
+                }s
               `}
+              icon={
+                <PokeBall
+                  css={css`
+                    font-size: 40px;
+                  `}
+                />
+              }
+              disabled={isThrowingPokeball}
+              onClick={handleClickCatchPokemon}
             />
-            <span
-              css={css`
-                font-weight: bold;
-                display: block;
-              `}
-            >
-              My Pokemon
-            </span>
-          </button>
-        </div>
-      </div>
+          ) : null}
+          <BottomNavigationAction
+            label="My Pokemon"
+            icon={
+              <SiPocket
+                css={css`
+                  font-size: 40px;
+                `}
+              />
+            }
+            value="/my-pokemon"
+            component={NavLink}
+            to="/my-pokemon"
+          />
+        </BottomNavigation>
+      </Paper>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={4000}
