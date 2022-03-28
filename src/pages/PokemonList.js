@@ -3,11 +3,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { css, jsx } from "@emotion/react";
-import { useHistory } from "react-router-dom";
 import WildPokemonCard from "../components/WildPokemonCard";
 
 const PokemonList = () => {
-  const history = useHistory();
 
   const [pokemonList, setPokemonList] = useState([]);
   useEffect(() => {
