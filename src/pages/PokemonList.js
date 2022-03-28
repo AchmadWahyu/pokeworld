@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { css, jsx } from "@emotion/react";
 import WildPokemonCard from "../components/WildPokemonCard";
+import Layout from "../Layout";
 
 const PokemonList = () => {
   const [pokemonList, setPokemonList] = useState([]);
@@ -25,8 +26,7 @@ const PokemonList = () => {
   }, []);
 
   return (
-    <div>
-      All Pokemon List
+    <Layout pageTitle="All Pokemon List">
       <div
         css={css`
           display: flex;
@@ -40,7 +40,7 @@ const PokemonList = () => {
           <WildPokemonCard key={pokemon.name} name={pokemon.name} />
         ))}
       </div>
-    </div>
+    </Layout>
   );
 };
 

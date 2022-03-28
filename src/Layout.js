@@ -12,19 +12,21 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  IconButton,
   Paper,
   Snackbar,
   TextField,
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { MdExplore } from "react-icons/md";
+import { MdExplore, MdArrowBack } from "react-icons/md";
 import { SiPocket } from "react-icons/si";
-import { NavLink, useLocation, useParams } from "react-router-dom";
+import { NavLink, useHistory, useLocation, useParams } from "react-router-dom";
 import { MyPokemonContext } from "./contexts/MyPokemonContext";
 import { ReactComponent as PokeBall } from "./icons/pokeball.svg";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, pageTitle }) => {
   const { pokemon_name } = useParams();
+  const history = useHistory();
   const { pokemon: myPokemon, addPokemon } = useContext(MyPokemonContext);
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -79,6 +81,43 @@ const Layout = ({ children }) => {
           padding: 12px;
         `}
       >
+        <div
+          css={css`
+            display: flex;
+            flex-flow: row nowrap;
+            padding: 4px;
+            background-color: #ffff;
+            position: sticky;
+            top: 0;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+          `}
+        >
+          {pathname !== "/" ? (
+            <IconButton
+              aria-label="delete"
+              size="large"
+              onClick={() => history.goBack()}
+            >
+              <MdArrowBack
+                css={css`
+                  font-size: 36px;
+                `}
+              />
+            </IconButton>
+          ) : null}
+          <div
+            css={css`
+              font-weight: bold;
+              font-size: 32px;
+              text-transform: capitalize;
+            `}
+          >
+            {pageTitle}
+          </div>
+        </div>
         {children}
       </div>
       <Paper
