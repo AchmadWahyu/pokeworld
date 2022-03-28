@@ -1,10 +1,18 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from "@emotion/react";
+import { useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { MyPokemonContext } from "../contexts/MyPokemonContext";
 
 const WildPokemonCard = ({ name }) => {
   const history = useHistory();
+  const { pokemon } = useContext(MyPokemonContext);
+
+  const countTotalCurrentOwnedPokemon = (name) => {
+    const arrOwnedPokemon = pokemon.filter((p) => p.name === name);
+    return arrOwnedPokemon.length;
+  };
 
   const handlePokemonClick = (pokemonName) => {
     history.push(`/pokemon/${pokemonName}`);
@@ -23,7 +31,7 @@ const WildPokemonCard = ({ name }) => {
       `}
     >
       <h4>{name}</h4>
-      <h4>10</h4>
+      <h4>{countTotalCurrentOwnedPokemon(name)}</h4>
     </div>
   );
 };

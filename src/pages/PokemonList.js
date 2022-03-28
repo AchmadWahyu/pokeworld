@@ -6,7 +6,6 @@ import { css, jsx } from "@emotion/react";
 import WildPokemonCard from "../components/WildPokemonCard";
 
 const PokemonList = () => {
-
   const [pokemonList, setPokemonList] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
