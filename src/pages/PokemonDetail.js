@@ -5,6 +5,8 @@ import axios from "axios";
 import { css, jsx } from "@emotion/react";
 import { useParams } from "react-router-dom";
 import Layout from "../Layout";
+import { IconButton } from "@mui/material";
+import { ReactComponent as PokeBall } from "../icons/pokeball.svg";
 
 const PokemonDetail = () => {
   const { pokemon_name } = useParams();
@@ -134,6 +136,40 @@ const PokemonDetail = () => {
             </li>
           ))}
         </ul>
+      </div>
+      <div
+        css={css`
+          text-align: center;
+          z-index: 99;
+          position: relative;
+        `}
+      >
+        <IconButton
+          aria-label="delete"
+          size="large"
+          css={css`
+            margin: 0 auto;
+            animation: Pokeball-logo-float infinite 3s ease-in-out;
+
+            @keyframes Pokeball-logo-float {
+              0% {
+                transform: translateY(0);
+              }
+              50% {
+                transform: translateY(15px);
+              }
+              100% {
+                transform: translateY(0px);
+              }
+            }
+          `}
+        >
+          <PokeBall
+            css={css`
+              height: 2.5em;
+            `}
+          />
+        </IconButton>
       </div>
     </Layout>
   );
