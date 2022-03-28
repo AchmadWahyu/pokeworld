@@ -18,6 +18,7 @@ const MyPokemonList = () => {
           gap: 12px;
           width: 300px;
           margin: 0 auto;
+          margin-bottom: 80px;
         `}
       >
         {pokemon.map((pokemon) => (
