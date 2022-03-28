@@ -131,7 +131,7 @@ const PokemonDetail = () => {
               `}
             />
           </div>
-          <div css={css``}>
+          <div>
             <p>Moves: </p>
             <ul
               css={css`
@@ -162,7 +162,7 @@ const PokemonDetail = () => {
             </ul>
           </div>
         </div>
-        <div css={css``}>
+        <div>
           <p>Types: </p>
           <ul
             css={css`
