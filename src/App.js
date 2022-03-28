@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PokemonList from "./pages/PokemonList";
 import MyPokemonList from "./pages/MyPokemonList";
-import Layout from "./Layout";
 import PokemonDetail from "./pages/PokemonDetail";
 import MyPokemonContextProvider from "./contexts/MyPokemonContext";
 
