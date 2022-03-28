@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { css, jsx } from "@emotion/react";
 import { useHistory } from "react-router-dom";
+import WildPokemonCard from "../components/WildPokemonCard";
 
 const PokemonList = () => {
   const history = useHistory();
@@ -26,10 +27,6 @@ const PokemonList = () => {
     fetchData();
   }, []);
 
-  const handlePokemonClick = (pokemonName) => {
-    history.push(`/pokemon/${pokemonName}`);
-  };
-
   return (
     <div>
       All Pokemon List
@@ -43,21 +40,7 @@ const PokemonList = () => {
         `}
       >
         {pokemonList.map((pokemon) => (
-          <div
-            key={pokemon.name}
-            onClick={() => handlePokemonClick(pokemon.name)}
-            css={css`
-              display: flex;
-              flex-flow: row nowrap;
-              justify-content: space-between;
-              padding: 0 12px;
-              border-radius: 6px;
-              box-shadow: 0px 11px 36px 8px rgba(214, 214, 214, 1);
-            `}
-          >
-            <h4>{pokemon.name}</h4>
-            <h4>10</h4>
-          </div>
+          <WildPokemonCard key={pokemon.name} name={pokemon.name} />
         ))}
       </div>
     </div>
