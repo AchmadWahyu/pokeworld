@@ -2,7 +2,6 @@
 /** @jsx jsx */
 import { useContext } from "react";
 import { css, jsx } from "@emotion/react";
-import { MdDelete } from "react-icons/md";
 import { MyPokemonContext } from "../contexts/MyPokemonContext";
 import Layout from "../Layout";
 import MyPokemonCard from "../components/MyPokemonCard";
