@@ -20,6 +20,7 @@ import {
 import { ReactComponent as PokeBall } from "../icons/pokeball.svg";
 import { MyPokemonContext } from "../contexts/MyPokemonContext";
 import PokemonTypeCard from "../components/PokemonTypeCard";
+import PokemonMoveCard from "../components/PokemonMoveCard";
 
 const PokemonDetail = () => {
   const { pokemon_name } = useParams();
@@ -147,18 +148,7 @@ const PokemonDetail = () => {
               `}
             >
               {pokemon.moves?.map((item) => (
-                <li
-                  key={item.move.url}
-                  css={css`
-                    list-style-type: none;
-                    margin: 8px 0;
-                    padding: 12px 8px;
-                    border: 1px solid #d9d9d9;
-                    border-radius: 12px;
-                  `}
-                >
-                  {item.move.name}
-                </li>
+                <PokemonMoveCard key={item.move.url} name={item.move.name} />
               ))}
             </ul>
           </div>
