@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { css, jsx } from "@emotion/react";
 import { MdDelete } from "react-icons/md";
 import { MyPokemonContext } from "../contexts/MyPokemonContext";
+import Layout from "../Layout";
 
 const MyPokemonList = () => {
   const { pokemon, removePokemon } = useContext(MyPokemonContext);
@@ -13,8 +14,7 @@ const MyPokemonList = () => {
   };
 
   return (
-    <div>
-      My Pokemon List
+    <Layout pageTitle="My Pokemon List">
       <div
         css={css`
           display: flex;
@@ -64,7 +64,7 @@ const MyPokemonList = () => {
           </div>
         ))}
       </div>
-    </div>
+    </Layout>
   );
 };
 

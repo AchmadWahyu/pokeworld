@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { css, jsx } from "@emotion/react";
 import { useParams } from "react-router-dom";
+import Layout from "../Layout";
 
 const PokemonDetail = () => {
   const { pokemon_name } = useParams();
@@ -28,7 +29,7 @@ const PokemonDetail = () => {
   }, [pokemon_name]);
 
   return (
-    <div>
+    <Layout pageTitle={pokemon_name}>
       <div
         css={css`
           display: flex;
@@ -134,7 +135,7 @@ const PokemonDetail = () => {
           ))}
         </ul>
       </div>
-    </div>
+    </Layout>
   );
 };
 
