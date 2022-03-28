@@ -140,8 +140,7 @@ const PokemonDetail = () => {
       <div
         css={css`
           text-align: center;
-          z-index: 99;
-          position: relative;
+          
         `}
       >
         <IconButton
@@ -149,6 +148,8 @@ const PokemonDetail = () => {
           size="large"
           css={css`
             margin: 0 auto;
+            z-index: 99;
+            position: relative;
             animation: Pokeball-logo-float infinite 3s ease-in-out;
 
             @keyframes Pokeball-logo-float {
