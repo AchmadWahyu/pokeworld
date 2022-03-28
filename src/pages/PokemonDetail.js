@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import { ReactComponent as PokeBall } from "../icons/pokeball.svg";
 import { MyPokemonContext } from "../contexts/MyPokemonContext";
+import PokemonTypeCard from "../components/PokemonTypeCard";
 
 const PokemonDetail = () => {
   const { pokemon_name } = useParams();
@@ -179,18 +180,7 @@ const PokemonDetail = () => {
             `}
           >
             {pokemon.types?.map((item) => (
-              <li
-                key={item.type.url}
-                css={css`
-                  list-style-type: none;
-                  margin: 0 8px;
-                  padding: 12px 8px;
-                  border: 1px solid #d9d9d9;
-                  border-radius: 20%;
-                `}
-              >
-                {item.type.name}
-              </li>
+              <PokemonTypeCard key={item.type.url} name={item.type.name} />
             ))}
           </ul>
         </div>
