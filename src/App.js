@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PokemonList from "./pages/PokemonList";
 import MyPokemonList from "./pages/MyPokemonList";
 import PokemonDetail from "./pages/PokemonDetail";
+import NotFound from "./pages/NotFound";
 import MyPokemonContextProvider from "./contexts/MyPokemonContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -21,6 +22,7 @@ function App() {
             />
             <Route exact path="/my-pokemon" component={MyPokemonList} />
             <Route exact path="/" component={PokemonList} />
+            <Route path="*" component={NotFound} />
           </QueryClientProvider>
         </MyPokemonContextProvider>
       </Switch>
