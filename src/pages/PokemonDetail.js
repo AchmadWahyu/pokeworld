@@ -14,37 +14,32 @@ import {
   DialogContentText,
   DialogTitle,
   IconButton,
+  Skeleton,
   Snackbar,
   TextField,
 } from "@mui/material";
 import { ReactComponent as PokeBall } from "../icons/pokeball.svg";
+import { ReactComponent as PokemonShadow } from "../icons/pokemon-shadow.svg";
 import { MyPokemonContext } from "../contexts/MyPokemonContext";
 import PokemonTypeCard from "../components/PokemonTypeCard";
 import PokemonMoveCard from "../components/PokemonMoveCard";
+import { useQuery } from "react-query";
 
 const PokemonDetail = () => {
   const { pokemon_name } = useParams();
   const { pokemon: myPokemon, addPokemon } = useContext(MyPokemonContext);
 
-  const [pokemon, setPokemon] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon/${pokemon_name}`
-        );
-        if (!response) {
-          window.alert("data kosong");
-        } else {
-          setPokemon(response.data);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  const {
+    isLoading,
+    error,
+    data: pokemon,
+  } = useQuery("pokemonDetail", async () => {
+    const response = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${pokemon_name}`
+    );
 
-    fetchData();
-  }, [pokemon_name]);
+    return response.data;
+  });
 
   const [openAddNickName, setOpenAddNickName] = useState(false);
   const [nickName, setNickName] = useState("");
@@ -87,6 +82,41 @@ const PokemonDetail = () => {
     setIsCaught(false);
     setOpenAddNickName(false);
   };
+
+  if (isLoading) {
+    return (
+      <Layout pageTitle={<Skeleton variant="text" width={150} />}>
+        <div
+          css={css`
+            text-align: center;
+          `}
+        >
+          <PokemonShadow
+            css={css`
+              display: inline-block;
+              height: 300px;
+              width: 300px;
+            `}
+          />
+          <h3>Fetching Pokemon Data...</h3>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout pageTitle="Error">
+        <div
+          css={css`
+            text-align: center;
+          `}
+        >
+          <h3>Error on fetching Pokemon data</h3>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <React.Fragment>

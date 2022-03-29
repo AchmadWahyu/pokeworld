@@ -9,8 +9,6 @@ import Layout from "../Layout";
 import { useInfiniteQuery } from "react-query";
 import InfiniteScroll from "react-infinite-scroller";
 
-const arr = ["pokemon", "pokemon1", "pokemon2", "pokemon3"];
-
 const PokemonList = () => {
   const fetchPokemonList = async ({ pageParam = 1 }) => {
     const response = await axios.get(
