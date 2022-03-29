@@ -2,10 +2,14 @@
 /** @jsx jsx */
 import axios from "axios";
 import { css, jsx } from "@emotion/react";
-import WildPokemonCard from "../components/WildPokemonCard";
+import WildPokemonCard, {
+  WildPokemonCardSkeleton,
+} from "../components/WildPokemonCard";
 import Layout from "../Layout";
 import { useInfiniteQuery } from "react-query";
 import InfiniteScroll from "react-infinite-scroller";
+
+const arr = ["pokemon", "pokemon1", "pokemon2", "pokemon3"];
 
 const PokemonList = () => {
   const fetchPokemonList = async ({ pageParam = 1 }) => {
@@ -30,25 +34,18 @@ const PokemonList = () => {
   return (
     <Layout pageTitle="All Pokemon List">
       {isLoading ? (
-        <i>loading...</i>
+        <LoadingState />
       ) : isError ? (
-        <b>error</b>
+        <b>Error while fetching data</b>
       ) : (
         <InfiniteScroll
           pageStart={0}
           loadMore={fetchNextPage}
           hasMore={hasNextPage}
-          loader={
-            <div className="loader" key={0}>
-              Loading ...
-            </div>
-          }
+          loader={<LoadingState />}
           css={css`
             display: flex;
             flex-flow: column nowrap;
-            gap: 12px;
-            width: 300px;
-            margin: 0 auto;
             margin-bottom: 80px;
           `}
         >
@@ -64,3 +61,9 @@ const PokemonList = () => {
 };
 
 export default PokemonList;
+
+const LoadingState = () => {
+  return Array.from({ length: 5 }, (v, i) => i).map((index) => (
+    <WildPokemonCardSkeleton key={index} />
+  ));
+};

@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { SiPocket } from "react-icons/si";
 import { useHistory } from "react-router-dom";
 import { MyPokemonContext } from "../contexts/MyPokemonContext";
+import Skeleton from "@mui/material/Skeleton";
 
 const WildPokemonCard = ({ name }) => {
   const history = useHistory();
@@ -30,6 +31,12 @@ const WildPokemonCard = ({ name }) => {
         padding: 0 12px;
         border-radius: 6px;
         box-shadow: 0px 11px 36px 8px rgba(214, 214, 214, 1);
+        margin: 12px auto;
+        width: 300px;
+
+        &:hover {
+          cursor: pointer;
+        }
       `}
     >
       <h4
@@ -52,3 +59,17 @@ const WildPokemonCard = ({ name }) => {
 };
 
 export default WildPokemonCard;
+
+export const WildPokemonCardSkeleton = () => {
+  return (
+    <Skeleton
+      css={css`
+        border-radius: 6px;
+        margin: 12px auto;
+      `}
+      variant="rectangular"
+      width={300}
+      height={60}
+    />
+  );
+};
