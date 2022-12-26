@@ -1,16 +1,33 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { useContext } from "react";
-import { css, jsx } from "@emotion/react";
-import { MyPokemonContext } from "../contexts/MyPokemonContext";
-import Layout from "../Layout";
-import MyPokemonCard from "../components/MyPokemonCard";
+import { useContext, useState } from 'react';
+import { css, jsx } from '@emotion/react';
+import { Button } from '@mui/material';
+import { FaBomb } from 'react-icons/fa';
+import { MyPokemonContext } from '../contexts/MyPokemonContext';
+import Layout from '../Layout';
+import MyPokemonCard from '../components/MyPokemonCard';
 
 const MyPokemonList = () => {
-  const { pokemon } = useContext(MyPokemonContext);
+  let { pokemon } = useContext(MyPokemonContext);
+  const [myPokemon, setMyPokemon] = useState(pokemon);
+
+  const handleCrash = () => {
+    setMyPokemon(2.4);
+  };
 
   return (
     <Layout pageTitle="My Pokemon List">
+      <div
+        css={css`
+          text-align: center;
+          margin-bottom: 16px;
+        `}
+      >
+        <Button onClick={handleCrash} color="error" variant="contained" endIcon={<FaBomb />}>
+          Lets break the app!
+        </Button>
+      </div>
       <div
         css={css`
           display: flex;
@@ -21,7 +38,7 @@ const MyPokemonList = () => {
           margin-bottom: 80px;
         `}
       >
-        {pokemon.map((pokemon) => (
+        {myPokemon.map((pokemon) => (
           <MyPokemonCard
             key={pokemon.nanoId}
             id={pokemon.nanoId}
